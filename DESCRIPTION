@@ -6,12 +6,17 @@ Author: Nils DM
 Maintainer: NilsDM <nilsdmikkelsen@gmail.com>
 Description: Downloads, and configures all historical Formula One
     data (1950-Present) into a fully configured duckdb database.
-License: GPL-2
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    datamodelr,
+    datamodelr, 
     DBI,
     dm,
-    duckdb,
+    duckdb (== 0.2.7),
+    magrittr,
+    dplyr,
     rlang
+Remotes:
+    bergant/datamodelr
+RoxygenNote: 7.1.2

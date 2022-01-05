@@ -1,8 +1,3 @@
-# library(duckdb)
-# library(DBI)
-# library(duckdb)
-# library(dm)
-
 #' Download 'Ergast' CSV Database Tables
 #' This function downloads the 'Ergast' database as a set of CSV files and unzips them into a local directory
 #' @param destfile a character string with the name of the directory in which the files are saved
@@ -21,16 +16,17 @@ downloadErgastCSV <- function(destfile = paste0(getwd(), "/f1db_csv")){
 #' @param csv_dir either NULL or the name of a directory containing csv files from Ergast.
 #' If NULL, the files will be downloaded and placed in a directory within the working directory named "/f1db_csv"
 #' @param rm_csv logical indicating whether the csv directory should be deleted after initializing the database
+#' @param type Indicates the type of database backend used
 #' @details \code{createF1db()} creates a local 'DuckDB' database using csv files downloaded from Ergast.
 #' The database will be located in a file 'f1_db.duckdb' within the working directory.
 #'
-#' Databases created with this function can be interacted with using functions from the 'DBI' Package. You can also use the convenience function \code{\link{F1dbConnect}} to reconnect to a database created by \code{createF1db}
+# Databases created with this function can be interacted with using functions from the 'DBI' Package. You can also use the convenience function \code{\link{F1dbConnect}} to reconnect to a database created by \code{createF1db}
 #' @return an object of class \code{\link[duckdb:duckdb_connection-class]{duckdb_connection}}
 #' @examples \donttest{
 #' library(DBI)
-#' con <- createF1db()
-#' dbListTables(con)
-#' dbDisconnect(con)
+# con <- createF1db()
+# dbListTables(con)
+# dbDisconnect(con)
 #' }
 createF1db <- function(csv_dir = NULL, rm_csv = FALSE, type = "duckdb"){
 
@@ -57,7 +53,7 @@ createF1db <- function(csv_dir = NULL, rm_csv = FALSE, type = "duckdb"){
 
       # Import from CSV files
       for(i in 1:length(table_names)){
-        assign(table_names[i], read.csv(file = csv_names[i], fileEncoding='UTF-8'))
+        assign(table_names[i], utils::read.csv(file = csv_names[i], fileEncoding='UTF-8'))
       }
 
       # Compile list of tables for mapping
@@ -178,32 +174,32 @@ createF1db <- function(csv_dir = NULL, rm_csv = FALSE, type = "duckdb"){
 
 }
 
-#' Connect to an existing F1 database
-#' Establishes a connection to a 'DuckDB' database previously created by \code{\link{createF1db}}.
-#' @param file path to the database file
-#' @return an object of class \code{\link[duckdb:duckdb_connection-class]{duckdb_connection}}
-#' @examples \donttest{
-#' # a file "f1_db.duckdb" already exists in the working directory
-#' con <- F1dbConnect()
-#' dbListFields(con)
-#' circuits <- dbReadTable(con, "circuits")
-#' }
+# Connect to an existing F1 database
+# Establishes a connection to a 'DuckDB' database previously created by \code{\link{createF1db}}.
+# @param file path to the database file
+# @return an object of class \code{\link[duckdb:duckdb_connection-class]{duckdb_connection}}
+# @examples \donttest{
+# # a file "f1_db.duckdb" already exists in the working directory
+# con <- F1dbConnect()
+# dbListFields(con)
+# circuits <- dbReadTable(con, "circuits")
+# }
 
 # null_format <- function(table){
 #   df <- as.data.frame(lapply(table,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
 #   return(df)
 #
 # }
-F1dbConnect <- function(file = "f1_db.duckdb"){
-  if(!file.exists(file)){
-    stop(paste0("Database file ", file, " not found"), call. = FALSE)
-  }
-  if(grepl(".duckdb", file, ignore.case = TRUE)){
-    DBI::dbConnect(duckdb::duckdb(), file)
-  } else {
-
-    stop("file does not have extension '.duckdb'", call. = FALSE)
-  }
-
-}
+# F1dbConnect <- function(file = "f1_db.duckdb"){
+#   if(!file.exists(file)){
+#     stop(paste0("Database file ", file, " not found"), call. = FALSE)
+#   }
+#   if(grepl(".duckdb", file, ignore.case = TRUE)){
+#     DBI::dbConnect(duckdb::duckdb(), file)
+#   } else {
+#
+#     stop("file does not have extension '.duckdb'", call. = FALSE)
+#   }
+#
+# }
 

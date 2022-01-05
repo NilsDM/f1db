@@ -1,4 +1,11 @@
-#' downloads configures connect to database
+#' @title Downloads configures connect to database
+#' @description Downloads configures connect to database
+#' @param collect_tables
+#' Boolean Value for additionally executing the f1db_collect_tables(con) function
+#' @return A duckdb database connection object
+#' @export
+#' @examples \dontrun{con <- f1db_connect()}
+#'
 f1db_connect <- function(collect_tables = FALSE){
 
     # Load packages, install if not available

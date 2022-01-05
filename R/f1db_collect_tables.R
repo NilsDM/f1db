@@ -1,4 +1,11 @@
-#' Save all f1db tables as global variable tbl's with the same name
+#' @title Save all f1db tables as global variable tbl's with the same name
+#' @description Save all f1db tables as global variable tbl's with the same name
+#' @param con A duckdb database connection object
+#'
+#' @return Saves all 13 Formula One tables as global objects
+#' @export
+#' @importFrom magrittr %>%
+#' @examples \dontrun{f1db_collect_tables(con)}
 
 f1db_collect_tables <- function(con){
     constructors          <<- dplyr::tbl(con, "constructors") %>% dplyr::collect()

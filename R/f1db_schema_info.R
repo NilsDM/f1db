@@ -1,4 +1,10 @@
-#' Outputs tbl that gives descriptive information about the tables and their contents
+#' @title Outputs tbl that gives descriptive information about the tables and their contents
+#' @description Outputs tbl that gives descriptive information about the tables and their contents
+#' @param con
+#' A duckdb database connection object
+#' @return A tbl of database info
+#' @importFrom magrittr %>%
+#' @export
 
 f1db_schema_info <- function(con){
 
@@ -8,10 +14,11 @@ f1db_schema_info <- function(con){
                       "seasons", "status", "races", "results", "qualifying")
 
     for(i in 1:length(table_names)){
-        assign(table_names[i], tbl(con, table_names[i]) %>% collect())
+        assign(table_names[i], tbl(con, table_names[i]) %>% dplyr::collect())
     }
 
-    schema_info <<- data.frame(endpoint = table_names,
+
+    schema_info <- data.frame(endpoint = table_names,
                                endpoint_title = c("teams","teams leaderboard",
                                                   "team results", "circuits",
                                                   "drivers", "driver leaderboard",
@@ -48,11 +55,13 @@ f1db_schema_info <- function(con){
                                    prop_function(qualifying)
 
                                ))  %>% as_tibble()
-    schema_info
-
+    return(schema_info)
 }
 
-#' Helper function used inside schema_info
+#' @title Helper function used inside schema_info
+#' @description Helper function used inside schema_info
+#' @param t value indicating dimensions
+#' @return dimension string
 prop_function <- function(t){
     n_cols <- length(t)
     n_rows <- nrow(t)

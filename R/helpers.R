@@ -1,24 +1,35 @@
-
-#' Returns dm object for f1db database
+#' @title Returns dm object for f1db database, for internal use only by f1db_connect
+#' @description Returns dm object for f1db database, for internal use only by f1db_connect
+#' @return dm_obj
+#' @export
+#'
 f1db_get_dm <- function(){
     return(dm_obj)
 }
 
-#' Disconnects from database
+#' @title Disconnects from database
+#' @description Disconnects from database
+#' @param con A duckdb database connection object
+#' @param shutdown Boolean value for additionally shutting down the database connection
+#' @export
+#'
 f1db_disconnect <- function(con, shutdown = TRUE){
     DBI::dbDisconnect(con, shutdown = shutdown)
 }
 
 
-#' Reconnects to database, currently does not work
-f1db_reconnect <- function(){
-    con <- DBI::dbConnect(duckdb("f1_db.duckdb", read_only = TRUE))
-    return(con)
+# Reconnects to database, currently does not work
+# f1db_reconnect <- function(){
+#     con <- DBI::dbConnect(duckdb("f1_db.duckdb", read_only = TRUE))
+#     return(con)
+#
+#}
 
-}
 
-
-#' Deletes database files of the exist
+#' @title Deletes database files of the exist, for internal use only by f1db_connect
+#' @description Deletes database files of the exist, for internal use only by f1db_connect
+#' @export
+#'
 f1db_cleardb <- function(){
     if(file.exists("f1_db.duckdb")){
         file.remove("f1_db.duckdb")

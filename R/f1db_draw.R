@@ -1,8 +1,3 @@
-
-
-
-#source("build_schema_diagram.R") # build_schema_diagram()
-#' Constructs schema diagram
 build_schema_diagram <- function(constructors,constructor_standings,
                                  constructor_results, circuits, drivers,
                                  driver_standings, lap_times, pit_stops,
@@ -12,19 +7,19 @@ build_schema_diagram <- function(constructors,constructor_standings,
                         constructor_results, circuits, drivers,
                         driver_standings, lap_times, pit_stops,
                         seasons, status, races, results, qualifying) %>%
-        dm_set_key("circuits", "circuitId") %>%
-        dm_set_key("constructors", "constructorId") %>%
-        dm_set_key("drivers", "driverId") %>%
-        dm_set_key("results", "resultId") %>%
-        dm_set_key("races", "raceId") %>%
-        dm_set_key("constructor_standings", "constructorStandingsId") %>%
-        dm_set_key("constructor_results", "constructorResultsId") %>%
-        dm_set_key("qualifying", "qualifyId") %>%
-        dm_set_key("seasons", "year") %>%
-        dm_set_key("status", "statusId") %>%
-        dm_set_key("driver_standings", "driverStandingsId") %>%
-        dm_set_key("pit_stops", c("raceId", "driverId")) %>%
-        dm_set_key("lap_times", c("raceId", "driverId")) %>%
+        datamodelr::dm_set_key("circuits", "circuitId") %>%
+        datamodelr::dm_set_key("constructors", "constructorId") %>%
+        datamodelr::dm_set_key("drivers", "driverId") %>%
+        datamodelr::dm_set_key("results", "resultId") %>%
+        datamodelr::dm_set_key("races", "raceId") %>%
+        datamodelr::dm_set_key("constructor_standings", "constructorStandingsId") %>%
+        datamodelr::dm_set_key("constructor_results", "constructorResultsId") %>%
+        datamodelr::dm_set_key("qualifying", "qualifyId") %>%
+        datamodelr::dm_set_key("seasons", "year") %>%
+        datamodelr::dm_set_key("status", "statusId") %>%
+        datamodelr::dm_set_key("driver_standings", "driverStandingsId") %>%
+        datamodelr::dm_set_key("pit_stops", c("raceId", "driverId")) %>%
+        datamodelr::dm_set_key("lap_times", c("raceId", "driverId")) %>%
         # flights$carrier == airlines$carrier (->)
         datamodelr::dm_add_references(
             constructor_standings$raceId == races$raceId,
@@ -55,7 +50,14 @@ build_schema_diagram <- function(constructors,constructor_standings,
         datamodelr::dm_render_graph()
 }
 
-#' Construct ER diagram for f1db schema&
+#' @title Constructs database schema diagram.
+#' @description Constructs database schema diagram.
+#' @param con
+#' A duckdb database connection object
+#' @return A duckdb database connection object.
+#' @importFrom magrittr %>%
+#' @export
+
 f1db_draw <- function(con){
     table_names <-  c("constructors","constructor_standings",
                       "constructor_results", "circuits", "drivers",
