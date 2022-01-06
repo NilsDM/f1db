@@ -62,7 +62,7 @@ createF1db <- function(csv_dir = NULL, rm_csv = FALSE, type = "duckdb"){
                          driver_standings, lap_times, pit_stops,
                          seasons, status, races, results, qualifying)
 
-      constructors %>% rename(`\name` = name)
+      # constructors %>% rename(`\name` = name)
       # Set N/A values to NULL
       # f1_tables_null <- map(f1_tables, null_format)
       #
@@ -150,7 +150,7 @@ createF1db <- function(csv_dir = NULL, rm_csv = FALSE, type = "duckdb"){
       if(all(all_check$is_key)){
         db_dm <- dm::copy_dm_to(con, dm_all_keys,
                             temporary = FALSE,
-                            set_key_constraints = TRUE)
+                            set_key_constraints = FALSE)
       }
 
     },
