@@ -13,7 +13,7 @@ Imports:
     datamodelr, 
     DBI,
     dm,
-    duckdb (<= 0.3.0),
+    duckdb (< 0.3.0),
     magrittr,
     dplyr,
     rlang
