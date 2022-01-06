@@ -71,19 +71,19 @@ createF1db <- function(csv_dir = NULL, rm_csv = FALSE, type = "duckdb"){
       #   assign(table_names[i], f1_tables_null[[i]])
       # }
 
-      constructors <- as.data.frame(lapply(constructors,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
-      constructor_standings <- as.data.frame(lapply(constructor_standings,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
-      constructor_results <- as.data.frame(lapply(constructor_results,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
-      circuits <- as.data.frame(lapply(circuits,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
-      drivers <- as.data.frame(lapply(drivers,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N",NA,x) else x))
-      driver_standings <- as.data.frame(lapply(driver_standings,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
-      lap_times <- as.data.frame(lapply(lap_times,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
-      pit_stops <- as.data.frame(lapply(pit_stops,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
-      seasons <- as.data.frame(lapply(seasons,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
-      status <- as.data.frame(lapply(status,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
-      races <- as.data.frame(lapply(races,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N",NA,x) else x))
-      results <- as.data.frame(lapply(results,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N",NA,x) else x))
-      qualifying <- as.data.frame(lapply(qualifying,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
+      # constructors <- as.data.frame(lapply(constructors,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
+      # constructor_standings <- as.data.frame(lapply(constructor_standings,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
+      # constructor_results <- as.data.frame(lapply(constructor_results,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
+      # circuits <- as.data.frame(lapply(circuits,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
+      # drivers <- as.data.frame(lapply(drivers,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N",NA,x) else x))
+      # driver_standings <- as.data.frame(lapply(driver_standings,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
+      # lap_times <- as.data.frame(lapply(lap_times,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
+      # pit_stops <- as.data.frame(lapply(pit_stops,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
+      # seasons <- as.data.frame(lapply(seasons,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
+      # status <- as.data.frame(lapply(status,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
+      # races <- as.data.frame(lapply(races,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N",NA,x) else x))
+      # results <- as.data.frame(lapply(results,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N",NA,x) else x))
+      # qualifying <- as.data.frame(lapply(qualifying,function(x) if(is.character(x)|is.factor(x)) gsub("\\\\N","NULL",x) else x))
 
       # Initial DM
       dm <- dm::dm(constructors, constructor_standings,
