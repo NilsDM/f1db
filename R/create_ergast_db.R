@@ -150,7 +150,7 @@ createF1db <- function(csv_dir = NULL, rm_csv = FALSE, type = "duckdb"){
       if(all(all_check$is_key)){
         db_dm <- dm::copy_dm_to(con, dm_all_keys,
                             temporary = FALSE,
-                            set_key_constraints = FALSE)
+                            set_key_constraints = TRUE)
       }
 
     },
