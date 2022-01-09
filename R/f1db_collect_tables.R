@@ -1,6 +1,6 @@
 #' @title Save all f1db tables as global variable tbl's with the same name
 #' @description Save all f1db tables as global variable tbl's with the same name
-#' @param con A duckdb database connection object
+#' @param con A SQLite database connection object
 #'
 #' @return Saves all 13 Formula One tables as global objects
 #' @export

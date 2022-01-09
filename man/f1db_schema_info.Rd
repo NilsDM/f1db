@@ -7,7 +7,7 @@
 f1db_schema_info(con)
 }
 \arguments{
-\item{con}{A duckdb database connection object}
+\item{con}{A sqlite database connection object}
 }
 \value{
 A tbl of database info

@@ -3,9 +3,9 @@
 \name{createF1db}
 \alias{createF1db}
 \title{Create an F1 database
-Creates a local 'DuckDB' database using the latest 'Ergast' data and establish a connection.}
+Creates a local 'RSQLite' database using the latest 'Ergast' data and establish a connection.}
 \usage{
-createF1db(csv_dir = NULL, rm_csv = FALSE, type = "duckdb")
+createF1db(csv_dir = NULL, rm_csv = FALSE, type = "sqlite")
 }
 \arguments{
 \item{csv_dir}{either NULL or the name of a directory containing csv files from Ergast.
@@ -16,15 +16,15 @@ If NULL, the files will be downloaded and placed in a directory within the worki
 \item{type}{Indicates the type of database backend used}
 }
 \value{
-an object of class \code{\link[duckdb:duckdb_connection-class]{duckdb_connection}}
+an object of class RSQLite
 }
 \description{
 Create an F1 database
-Creates a local 'DuckDB' database using the latest 'Ergast' data and establish a connection.
+Creates a local 'RSQLite' database using the latest 'Ergast' data and establish a connection.
 }
 \details{
-\code{createF1db()} creates a local 'DuckDB' database using csv files downloaded from Ergast.
-The database will be located in a file 'f1_db.duckdb' within the working directory.
+\code{createF1db()} creates a local 'RSQLite' database using csv files downloaded from Ergast.
+The database will be located in a file 'f1_db.RSQLite' within the working directory.
 }
 \examples{
 \donttest{

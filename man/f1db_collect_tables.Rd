@@ -7,7 +7,7 @@
 f1db_collect_tables(con)
 }
 \arguments{
-\item{con}{A duckdb database connection object}
+\item{con}{A SQLite database connection object}
 }
 \value{
 Saves all 13 Formula One tables as global objects

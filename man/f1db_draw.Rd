@@ -7,10 +7,10 @@
 f1db_draw(con)
 }
 \arguments{
-\item{con}{A duckdb database connection object}
+\item{con}{A SQLite database connection object}
 }
 \value{
-A duckdb database connection object.
+A sqlite database connection object.
 }
 \description{
 Constructs database schema diagram.

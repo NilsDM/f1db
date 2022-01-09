@@ -53,8 +53,8 @@ build_schema_diagram <- function(constructors,constructor_standings,
 #' @title Constructs database schema diagram.
 #' @description Constructs database schema diagram.
 #' @param con
-#' A duckdb database connection object
-#' @return A duckdb database connection object.
+#' A SQLite database connection object
+#' @return A sqlite database connection object.
 #' @importFrom magrittr %>%
 #' @export
 

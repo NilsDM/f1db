@@ -1,11 +1,11 @@
 Package: f1db
 Type: Package
-Title: Constructs Ergast F1 duckdb database
+Title: Constructs Ergast F1 sqlite database
 Version: 0.1.0
 Author: Nils DM
 Maintainer: NilsDM <nilsdmikkelsen@gmail.com>
 Description: Downloads, and configures all historical Formula One
-    data (1950-Present) into a fully configured duckdb database.
+    data (1950-Present) into a fully configured sqlite database.
 License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -13,7 +13,7 @@ Imports:
     datamodelr, 
     DBI,
     dm,
-    duckdb (> 0.3.0),
+    RSQLite, 
     magrittr,
     dplyr,
     rlang

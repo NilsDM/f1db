@@ -10,7 +10,7 @@ f1db_connect(collect_tables = FALSE)
 \item{collect_tables}{Boolean Value for additionally executing the f1db_collect_tables(con) function}
 }
 \value{
-A duckdb database connection object
+A SQLite database connection object
 }
 \description{
 Downloads configures connect to database

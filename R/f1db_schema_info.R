@@ -1,7 +1,7 @@
 #' @title Outputs tbl that gives descriptive information about the tables and their contents
 #' @description Outputs tbl that gives descriptive information about the tables and their contents
 #' @param con
-#' A duckdb database connection object
+#' A sqlite database connection object
 #' @return A tbl of database info
 #' @importFrom magrittr %>%
 #' @export

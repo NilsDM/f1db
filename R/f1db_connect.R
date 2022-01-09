@@ -2,19 +2,19 @@
 #' @description Downloads configures connect to database
 #' @param collect_tables
 #' Boolean Value for additionally executing the f1db_collect_tables(con) function
-#' @return A duckdb database connection object
+#' @return A SQLite database connection object
 #' @export
 #' @examples \dontrun{con <- f1db_connect()}
 #'
 f1db_connect <- function(collect_tables = FALSE){
 
     # Load packages, install if not available
-    install_load_packages("DBI", "dm", "duckdb",
+    install_load_packages("DBI", "dm", "RSQLite",
                           "tidyverse", "lubridate",
                           "rlang", "datamodelr")
 
     # Database connection
-    if(file.exists("f1_db.duckdb")){
+    if(file.exists("f1_db.sqlite")){
         f1db_cleardb()
     }
     con_dm <- createF1db()

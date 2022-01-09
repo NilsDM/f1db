@@ -12,23 +12,23 @@ downloadErgastCSV <- function(destfile = paste0(getwd(), "/f1db_csv")){
 
 
 #' Create an F1 database
-#' Creates a local 'DuckDB' database using the latest 'Ergast' data and establish a connection.
+#' Creates a local 'RSQLite' database using the latest 'Ergast' data and establish a connection.
 #' @param csv_dir either NULL or the name of a directory containing csv files from Ergast.
 #' If NULL, the files will be downloaded and placed in a directory within the working directory named "/f1db_csv"
 #' @param rm_csv logical indicating whether the csv directory should be deleted after initializing the database
 #' @param type Indicates the type of database backend used
-#' @details \code{createF1db()} creates a local 'DuckDB' database using csv files downloaded from Ergast.
-#' The database will be located in a file 'f1_db.duckdb' within the working directory.
+#' @details \code{createF1db()} creates a local 'RSQLite' database using csv files downloaded from Ergast.
+#' The database will be located in a file 'f1_db.RSQLite' within the working directory.
 #'
-# Databases created with this function can be interacted with using functions from the 'DBI' Package. You can also use the convenience function \code{\link{F1dbConnect}} to reconnect to a database created by \code{createF1db}
-#' @return an object of class \code{\link[duckdb:duckdb_connection-class]{duckdb_connection}}
+# Databases created with this function can be interacted with using functions from the 'DBI' Packa ge. You can also use the convenience function \code{\link{F1dbConnect}} to reconnect to a database created by \code{createF1db}
+#' @return an object of class RSQLite
 #' @examples \donttest{
 #' library(DBI)
 # con <- createF1db()
 # dbListTables(con)
 # dbDisconnect(con)
 #' }
-createF1db <- function(csv_dir = NULL, rm_csv = FALSE, type = "duckdb"){
+createF1db <- function(csv_dir = NULL, rm_csv = FALSE, type = "sqlite"){
 
   # Download ergast Data
   if(file.exists(paste0(getwd(), "/f1_db.", type))){
@@ -39,8 +39,8 @@ createF1db <- function(csv_dir = NULL, rm_csv = FALSE, type = "duckdb"){
     csv_dir <- paste0(getwd(), "/f1db_csv")
   }
 
-  # Open duckdb connection
-  con <- DBI::dbConnect(duckdb::duckdb(), "f1_db.duckdb")
+  # Open sqlite connection
+  con <- DBI::dbConnect(RSQLite::SQLite(), "f1_db.SQLite")
   table_names <-  c("constructors","constructor_standings",
                     "constructor_results", "circuits", "drivers",
                     "driver_standings", "lap_times", "pit_stops",
@@ -146,7 +146,7 @@ createF1db <- function(csv_dir = NULL, rm_csv = FALSE, type = "duckdb"){
       # Confirm constraints are valid
       all_check <- dm_all_keys %>% dm::dm_examine_constraints()
 
-      # Copy dm to duckdb with all constraints
+      # Copy dm to sqlite with all constraints
       if(all(all_check$is_key)){
         db_dm <- dm::copy_dm_to(con, dm_all_keys,
                             temporary = FALSE,
@@ -157,8 +157,7 @@ createF1db <- function(csv_dir = NULL, rm_csv = FALSE, type = "duckdb"){
 
     error = function(e){
       DBI::dbDisconnect(con)
-      unlink("f1_db.duckdb.wai")
-      unlink("f1_db.duckdb")
+      unlink("f1_db.sqlite")
       stop(e)
     }
 

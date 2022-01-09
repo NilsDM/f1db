@@ -7,7 +7,7 @@
 f1db_disconnect(con, shutdown = TRUE)
 }
 \arguments{
-\item{con}{A duckdb database connection object}
+\item{con}{A SQLite database connection object}
 
 \item{shutdown}{Boolean value for additionally shutting down the database connection}
 }

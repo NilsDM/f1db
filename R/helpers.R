@@ -9,7 +9,7 @@ f1db_get_dm <- function(){
 
 #' @title Disconnects from database
 #' @description Disconnects from database
-#' @param con A duckdb database connection object
+#' @param con A SQLite database connection object
 #' @param shutdown Boolean value for additionally shutting down the database connection
 #' @export
 #'
@@ -31,11 +31,11 @@ f1db_disconnect <- function(con, shutdown = TRUE){
 #' @export
 #'
 f1db_cleardb <- function(){
-    if(file.exists("f1_db.duckdb")){
-        file.remove("f1_db.duckdb")
+    if(file.exists("f1_db.sqlite")){
+        file.remove("f1_db.sqlite")
     }
-    if(file.exists("f1_db.duckdb.wal")){
-        file.remove("f1_db.duckdb.wal")
+    if(file.exists("f1_db.sqlite.wal")){
+        file.remove("f1_db.sqlite.wal")
     }
 
 }
