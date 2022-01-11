@@ -21,11 +21,12 @@ f1db_connect <- function(collect_tables = FALSE){
     con <- con_dm[[1]]
     dm_obj <<- con_dm[[2]]
 
-    # Save all tables as global variable
-    # tbl's with the same name
+    # Save all tables as global variable tbl's with the same name
     if(collect_tables == TRUE){
         f1db_collect_tables(con)
     }
+    check_SQL_duplicates(con, dm_obj)
+
 
     return(con)
 
