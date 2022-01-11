@@ -2,7 +2,14 @@ build_schema_diagram <- function(constructors,constructor_standings,
                                  constructor_results, circuits, drivers,
                                  driver_standings, lap_times, pit_stops,
                                  seasons, status, races, results, qualifying){
-
+    # Set colour groups
+    display <- list(
+        accent1 = c("constructor_results", "constructors", "constructor_standings"),
+        accent2 = c("drivers", "driver_standings"),
+        accent3 = c("lap_times", "pit_stops", "qualifying"),
+        accent4 = c("results", "circuits","races", "seasons"),
+        accent5 = c("status")
+        )
     datamodelr::dm_from_data_frames(constructors,constructor_standings,
                         constructor_results, circuits, drivers,
                         driver_standings, lap_times, pit_stops,
@@ -20,7 +27,6 @@ build_schema_diagram <- function(constructors,constructor_standings,
         datamodelr::dm_set_key("driver_standings", "driverStandingsId") %>%
         datamodelr::dm_set_key("pit_stops", c("raceId", "driverId")) %>%
         datamodelr::dm_set_key("lap_times", c("raceId", "driverId")) %>%
-        # flights$carrier == airlines$carrier (->)
         datamodelr::dm_add_references(
             constructor_standings$raceId == races$raceId,
             constructor_standings$constructorId == constructors$constructorId,
@@ -44,6 +50,7 @@ build_schema_diagram <- function(constructors,constructor_standings,
             lap_times$driverId == drivers$driverId
 
         ) %>%
+        datamodelr::dm_set_display(display = display) %>%
         datamodelr::dm_create_graph(rankdir = "BT",
                         graph_name = "F1 Ergast Schema",
         ) %>%
